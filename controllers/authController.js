@@ -1,6 +1,8 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
+import transporter from "../config/nodemailer.js";
+import "dotenv/config";
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -35,6 +37,24 @@ export const register = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    // send welcome email
+
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: email,
+      subject: "Welcome to the Wolrd",
+      text: `Welcome to the community!\nYour account has been created with email: ${email}`,
+      html: `<b>Welcome to the community!</b><p>Your account has been created with email: ${email}</p>`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("Error sending email:", error);
+      } else {
+        console.log("Email sent:");
+      }
     });
 
     return res.json({ success: true });

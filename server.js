@@ -6,6 +6,7 @@ import cors from "cors";
 import "dotenv/config";
 import connectDB from "./config/mondodb.js";
 import authRouter from "./routes/authRoutes.js";
+import "dotenv/config";
 
 const app = express();
 
