@@ -2,7 +2,9 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
+import cors from "cors";
 import "dotenv/config";
+import connectDB from "./config/mondodb.js";
 
 const app = express();
 
@@ -10,10 +12,13 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({ Credentials: true }));
 app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 4000;
+// connect to db
 
+await connectDB();
 // API routes
 
 app.get("/", (req, res) => {
