@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import cors from "cors";
 import "dotenv/config";
 import connectDB from "./config/mondodb.js";
+import authRouter from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -24,6 +25,9 @@ await connectDB();
 app.get("/", (req, res) => {
   res.send("API is in work");
 });
+
+// API End points
+app.use("/api/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening post ${port} via http://localhost:${port}`);
