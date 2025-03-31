@@ -279,7 +279,7 @@ export const resetPassword = async (req, res) => {
   const { email, otp, newPassword } = req.body;
 
   if (!email || !otp || !newPassword) {
-    return res.json({ success: false, message: "Email, O|TP, and password are required" });
+    return res.json({ success: false, message: "Email, OTP, and password are required" });
   }
 
   try {
@@ -289,7 +289,7 @@ export const resetPassword = async (req, res) => {
       return res.json({ success: false, message: "User not found" });
     }
 
-    if (user.resetOtp === "" || user.otp !== otp) {
+    if (user.resetOtp === "" || user.resetOtp !== otp.toString()) {
       return res.json({ success: false, message: "Invalid OTP" });
     }
 

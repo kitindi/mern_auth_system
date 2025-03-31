@@ -7,6 +7,7 @@ import "dotenv/config";
 import connectDB from "./config/mondodb.js";
 import authRouter from "./routes/authRoutes.js";
 import "dotenv/config";
+import userRouter from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.get("/", (req, res) => {
 // API End points
 app.use("/api/auth", authRouter);
 
+// API End point for user data
+app.use("/api/user", userRouter);
 app.listen(port, () => {
   console.log(`Server is listening post ${port} via http://localhost:${port}`);
 });
