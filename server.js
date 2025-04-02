@@ -25,7 +25,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4500;
 // connect to db
 
 await connectDB();
